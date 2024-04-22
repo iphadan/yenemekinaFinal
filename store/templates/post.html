@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-9">
+        <div class="text-center text-white">
+            <h1 class="display-9 fw-bolder">Welcome {{user.first_name}} {{user.last_name}}</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Post A Car</p>
+        </div>
+    </div>
+</header>
+
+<div class="container px-3 px-lg-3 mt-5">
+
+<form action="{% url 'post' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <div class="row ">
+   
+    <div class="col-lg-6 col-md-12 col-sm-12">
+      <input class="form-control" type="text" placeholder="Name" name="name" > <br>
+      <input class="form-control" type="text" placeholder="Brand" name="brand"><br>
+      <input class="form-control" type="text" placeholder="Model" name="model" ><br>
+      <input class="form-control" type="text" placeholder="Condition" name="condition" ><br>
+      <input class="form-control" type="text" placeholder="Color" name="color"><br>
+      <input class="form-control" type="text" placeholder="Plate Number" name="plate" ><br>
+      <input class="form-control" type="number" placeholder="Price 0.0 " name="price" ><br>
+      <input class="form-control" type="text" placeholder="Telegram Link" name="telegram" ><br>
+    </div>
+
+    
+    <div class="col-lg-6 col-md-12 col-sm-12">   
+<fieldset style="color: black;">
+  <legend class="h6">Car Images</legend>
+  
+      
+  <div class="mb-3">
+    <label for="formFileSm" class="form-label">Front Image</label>
+    <input class="form-control form-control-sm" id="formFileSm" type="file"  name="image1">
+  </div> 
+  <div class="mb-3">
+    <label for="formFileSm" class="form-label">Additional Images</label>
+    <input class="form-control form-control-sm" id="formFileSm" type="file" multiple name="multipleImages">
+  </div>
+  <!--
+  <div class="mb-3">
+    <label for="formFileSm" class="form-label">Image 3</label>
+    <input class="form-control form-control-sm" id="formFileSm" type="file" name="image3">
+  </div>
+  <div class="mb-3">
+    <label for="formFileSm" class="form-label">Image 4</label>
+    <input class="form-control form-control-sm" id="formFileSm" type="file" name="image4" >
+  </div>
+  <div class="mb-3">
+    <label for="formFileSm" class="form-label">Image 5</label>
+    <input class="form-control form-control-sm" id="formFileSm" type="file" name="image5">
+  </div> -->
+
+</fieldset>
+</div>
+
+
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-secondary mb-3 justify-content-center">Post</button>
+  </div>
+</form>
+</div>
+
+
+
+{% endblock %}

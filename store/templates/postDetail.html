@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%  block content %}
+
+
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+             {% for carImage in carImages %}
+    
+      
+            <div class="col mb-5" > 
+               
+                <div class="card h-100" >
+                    <!-- Product image-->
+                    <a href="{% url 'detail' id=post.pk %}"><img  class="card-img-top" src="{{ carImage.image.url }}" alt="..." /></a>
+                    
+                    <!-- Product details-->
+             
+                   
+                    <!-- Product actions-->
+                   
+                </div > 
+            </div>{% endfor %}
+            
+            
+           
+           
+        </div>
+    </div>
+</section>
+
+<div class="text-center">
+    <!-- Product name-->
+    <h5 class="fw-bolder">{{post.car.brand}}</h5>
+    <div><i class="fw-bolder" ></iclass>Condition</i> <i> {{post.car.condition}}</i></div>
+   
+   <i class="fw-bolder" ></iclass>Plate</i> <i> {{post.car.plate}}...</i>
+    <!-- Product reviews-->
+    <div class="text-center">
+        <!-- Product price-->
+        <div  > <i class="fw-bolder" id='{{post.id}}' > Price </i>  {{post.car.price}}</div>
+ 
+  <a  onclick="copyToClipboard('{{post.yeneuser.phone}}')" >Copy & Call </a> {{post.yeneuser.phone}}
+    </div>
+
+ 
+</div>
+<div class="card h-100" >
+    <div class="card-body p-4">
+        <div class="text-center">
+<i>Check it In Our Social Media Channels</i>
+    <a href="{{post.car.telegram}}"><img style="width: 12%;" src="{% static 'assets/Telegram-logo.png' %}" alt="Telegram"></a>
+    <a href="#"><img style="width: 7%;" src="{% static 'assets/facebook-logo.jpeg' %}" alt="Telegram"></a>
+</div></div></div>
+
+{% endblock %}
