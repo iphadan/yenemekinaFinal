@@ -41,9 +41,10 @@
     <!-- Product reviews-->
     <div class="text-center">
         <!-- Product price-->
-        <div  > <i class="fw-bolder" id='{{post.id}}' > Price </i>  {{post.car.price}}</div>
+        <div  > <i class="fw-bolder"  > Price </i>  {{post.car.price}}</div>
  
-  <a  onclick="copyToClipboard('{{post.yeneuser.phone}}')" >Copy & Call </a> {{post.yeneuser.phone}}
+        <button class="btn btn-secondary mb-3" id= '{{post.id}}' onclick="copyToClipboard('{{post.yeneuser.phone}}','{{post.id}}')" style="transition: background-color 0.3s;">Copy & Call</button> {{post.yeneuser.phone}}
+    
     </div>
 
  

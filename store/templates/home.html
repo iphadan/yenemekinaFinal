@@ -3,9 +3,6 @@
 
 {% block content %}
 
-        <!-- Navigation-->
-    
-        <!-- Header-->
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
@@ -19,8 +16,9 @@
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
-                     {% for post in posts %}
-              {% if post.status %}
+                    
+                    {% for post in paginated_queryset %}
+              {% if post.status and post.yeneuser == request.user.yeneuser or not request.user.is_authenticated %}
               
                     <div class="col mb-5" > 
                        
@@ -45,20 +43,25 @@
                                     <!-- Product price-->
                                     <div> <i> Price </i>  {{post.car.price}}</div>
                              
-                              <a onclick="copyToClipboard('{{post.yeneuser.phone}}')">Copy & Call </a> {{post.yeneuser.phone}}
-                              <p id="copy-success-message" style="display: none; color: green;">Text copied successfully!</p>
+                                      <button  class="btn btn-secondary mb-3" id= '{{post.id}}' onclick="copyToClipboard('{{post.yeneuser.phone}}','{{post.id}}')" style="transition: background-color 0.3s;">Copy & Call</button> {{post.yeneuser.phone}}
+                              
                                 </div>
-                            </div>
+                                {% if request.user.is_authenticated %}<div>                                <button  class="btn btn-success mb-3"><a class="nav-link" href="{% url 'sold' id=post.pk %}">Sold</a></button> <button class="btn btn-info mb-3"><a class="nav-link" href="{% url 'editPost' id=post.pk %}">Edit</a></button> <button class="btn btn-danger mb-3"><a class="nav-link" href="#"></a>Delete</button>
+</div>  
+{% endif %}
+                            </div> 
                            
-                            <!-- Product actions-->
+                          
 
                         </div > 
                     </div>{% endif %}{% endfor %}
                     
                     
+                    
                    
                    
-                </div>
+                </div><p class="m-0 text-center text-black" > Page?  {% for page_number in paginated_queryset.paginator.page_range %} <a href="?page={{ page_number }}"><{{ page_number }}></a>{% endfor %}
+                    </p>
             </div>
         </section>
         {% endblock %}

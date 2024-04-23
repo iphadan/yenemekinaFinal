@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">{{request.user.first_name}} {{request.user.last_name}}</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Sold Car List</p>
+        </div>
+    </div>
+</header>
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+            
+            {% for post in paginated_queryset %}
+      {% if not post.status and post.yeneuser == request.user.yeneuser and request.user.is_authenticated %}
+      
+            <div class="col mb-5" > 
+               
+                <div class="card h-100" >
+                    <!-- Product image-->
+                    <a href="{% url 'detail' id=post.pk %}"><img class="card-img-top" src="{{ post.car.image.url }}" alt="..." /></a>
+                    
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">{{post.car.brand}}</h5>
+                            <div><i class="fw-bolder" ></iclass>Condition</i> <i> {{post.car.condition}}</i></div>
+                           
+                           <i class="fw-bolder" ></iclass>Plate</i> <i> {{post.car.plate}}...</i>
+                            <!-- Product reviews-->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                            
+                            </div>
+                            <!-- Product price-->
+                       
+                            <!-- Product price-->
+                            <div> <i> Price </i>  {{post.car.price}}</div>
+                     
+                              <button  class="btn btn-secondary mb-3" id= '{{post.id}}' onclick="copyToClipboard('{{post.yeneuser.phone}}','{{post.id}}')" style="transition: background-color 0.3s;">Copy & Call</button> {{post.yeneuser.phone}}
+                      
+                        </div>
+                       <a class="nav-link" style="text-decoration:line-through black;color: Green;">Sold</a>
+                    </div> 
+                   
+                  
+
+                </div > 
+            </div>{% endif %}{% endfor %}
+            
+            
+            
+           
+           
+        </div><p class="m-0 text-center text-black" > Page?  {% for page_number in paginated_queryset.paginator.page_range %} <a href="?page={{ page_number }}"><{{ page_number }}></a>{% endfor %}
+            </p>
+    </div>
+</section>
+{% endblock %}

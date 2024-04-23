@@ -3,17 +3,25 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Car,Post,CarImages,YeneUser
+
+
+from django.core.paginator import Paginator
 import time
 import telebot
 # Create your views here.
 def home(request):
     posts=Post.objects.all().order_by('-postedAt')
-    
+    paginator = Paginator(posts, 12)  # Set the desired number of items per page
+    page_number = request.GET.get('page')
+    paginated_queryset = paginator.get_page(page_number)
  
    
     context={
         'posts':posts,
+        'paginated_queryset':paginated_queryset
     }
+   
+    
     return render(request,'home.html',context)
 def about(request):
     return render(request,'about.html')
@@ -22,10 +30,11 @@ def loginUser(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         result=authenticate(request=request,username=username,password=password)
-        messages.success(request,'You\'ve successfully logged in !')
+        
    
         if(result):
             login(request,result)
+            messages.success(request,'You\'ve successfully logged in !')
     
             return redirect('post')
         else:
@@ -106,7 +115,7 @@ def post(request):
     elif request.user.is_authenticated :
         return render(request,'post.html')
     else:
-        messages.error(request,'Please Log in first !')
+        messages.error(request,'Please, Login first !')
         return render(request,'login.html')
 bot_token = "5658908983:AAEslZbdmd8FjTcke0xf28x6OGNPI9w9CeU"
 bot = telebot.TeleBot(bot_token)
@@ -132,3 +141,42 @@ def carDetail(request,id):
     }
     
     return render(request,'postDetail.html',context)
+
+def sold(request,id):
+    if request.user.is_authenticated:
+        post=Post.objects.get(pk=id)
+        post.status = False
+        post.save()
+        messages.info(request,'Successfully changed the post status!')
+        return redirect('home')
+        
+    
+    else:
+        messages.error(request,"Please, Login First")
+        return render(request,'login.html')
+def editPost(request,id):
+    if request.user.is_authenticated and request.method == 'GET':
+        post=Post.objects.get(pk=id)
+        context={
+          'post':post,  
+        }
+        return render(request,'editPost.html',context)
+    elif request.user.is_authenticated and request.method == 'GET':
+        ...
+    else:
+        messages.error(request,'please, Login First !')
+        return render(request,'login.html')
+def soldCars(request):
+    if request.user.is_authenticated:
+        posts=Post.objects.filter(status=False).order_by('-postedAt')
+        paginator = Paginator(posts, 12)  # Set the desired number of items per page
+        page_number = request.GET.get('page')
+        paginated_queryset = paginator.get_page(page_number)
+        context={
+        'posts':posts,
+        'paginated_queryset':paginated_queryset
+    }
+        return render(request,'soldCars.html',context)
+    else:
+        messages.error(request,'Please, Login First !')
+        return render(request,'login.html')

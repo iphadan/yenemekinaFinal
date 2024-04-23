@@ -37,9 +37,9 @@
         <!-- Core theme JS-->
         <script src="{% static 'js/scripts.js' %}"></script>
         <script>
-            function copyToClipboard(text) {
+            function copyToClipboard(text,id) {
 
-console.log(text);
+console.log(text,id);
 const tempInput = document.createElement('input');
         tempInput.value = text;
         document.body.appendChild(tempInput);
@@ -47,9 +47,13 @@ const tempInput = document.createElement('input');
         document.execCommand('copy');
         document.body.removeChild(tempInput);
 
-        document.getElementById('copy-button').style.backgroundColor = 'green';
+        button=document.getElementById(id);
+        button.style.backgroundColor = 'green';
+        button.innerHTML='Copied'
+
         setTimeout(() => {
-            document.getElementById('copy-button').style.backgroundColor = ''; // Reset color
+            button.style.backgroundColor = ''; 
+            button.innerHTML='Copy & Call'
         }, 1000); // Reset after 1 second
  
 
