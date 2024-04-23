@@ -22,15 +22,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-@kft9b_&w*b$0wbcal&mv=%uu+fo^-xjqv)5yq8#twd-*@(-4h'
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'django-insecure-@kft9b_&w*b$0wbcal&mv=%uu+fo^-xjqv)5yq8#twd-*@(-4h'
+# SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG','False').lower() == 'true'
+# DEBUG = os.environ.get('DEBUG','False').lower() == 'true'
+DEBUG=True
+# ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
-
-
+ALLOWED_HOSTS=[]
 # Application definition
 
 INSTALLED_APPS = [
@@ -83,8 +83,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-database_url=os.environ.get('DATABASE_URL')
-DATABASES['default'] = dj_database_url.parse(database_url)
+# database_url=os.environ.get('DATABASE_URL')
+# DATABASES['default'] = dj_database_url.parse(database_url)
 
 
 # Password validation
@@ -124,7 +124,6 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS=['static/']
 STATIC_ROOT = BASE_DIR / "staticfiles"
-
 MEDIA_URL = 'images/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'images')
 
