@@ -9,6 +9,32 @@ from django.core.paginator import Paginator
 import time
 import telebot
 # Create your views here.
+
+def seedSuperUser(request,username,password):
+    if User.objects.filter(username = username) or User.objects.filter(email = 'yenemekina@gmail.com') :
+        messages.error(request,'Username already exist ')
+        return render(request,'login.html')
+    try:
+        user=User.objects.create_superuser(username,'yenemekina@gmail.com',password)
+        try:
+            yeneuser=YeneUser.objects.create(user=user)
+        except:
+            user.delete()
+            
+            return HttpResponse('Super User Creation Failed')
+
+
+        messages.success(request,'Super User with the provided username and password has been created...')
+        messages.success(request,'Login')
+        return render(request,'login.html')
+    except:
+        messages.success(request,'username or password incorrect or username or email exist')
+        return render(request,'login.html')
+
+
+
+
+
 def home(request):
     posts=Post.objects.all().order_by('-postedAt')
     paginator = Paginator(posts, 12)  # Set the desired number of items per page

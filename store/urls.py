@@ -11,5 +11,6 @@ urlpatterns=[
     path('sold/<int:id>/',views.sold,name='sold'),
     path('editPost/<int:id>/',views.editPost,name='editPost'),
     path('soldCars/',views.soldCars,name='solcCars'),
+    path('seedSuperUser/<str:username>/<str:password>',views.seedSuperUser,name='seedSuperUser'),
 
 ]

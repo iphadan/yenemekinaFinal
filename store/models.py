@@ -16,8 +16,8 @@ class Car(models.Model):
         return self.brand + " " + self.name + " " + self.model
 class YeneUser(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE,related_name='yeneuser')
-    phone=models.CharField(max_length=10)
-    photo=models.ImageField(upload_to='upload/profile')
+    phone=models.CharField(max_length=14,default='0900000000',blank=True,null=True)
+    photo=models.ImageField(upload_to='upload/profile',blank=True,null=True)
     def __str__(self) -> str:
         return self.user.username + " " + self.phone
 
