@@ -38,8 +38,6 @@
         <script src="{% static 'js/scripts.js' %}"></script>
         <script>
             function copyToClipboard(text,id) {
-
-console.log(text,id);
 const tempInput = document.createElement('input');
         tempInput.value = text;
         document.body.appendChild(tempInput);
@@ -58,6 +56,16 @@ const tempInput = document.createElement('input');
  
 
 }
+function loadCircle(){
+    console.log('loading')
+    document.getElementById("spinner-grow-1").removeAttribute("hidden");
+    document.getElementById("spinner-grow-2").removeAttribute("hidden");
+    document.getElementById("spinner-grow-3").removeAttribute("hidden");
+    document.getElementById("spinner-grow-4").removeAttribute("hidden");
+    
+    
+    
+    }
         </script>
     </body>
 </html>

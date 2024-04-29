@@ -42,18 +42,34 @@
     <label for="formFileSm" class="form-label">Additional Images</label>
     <input class="form-control form-control-sm" id="formFileSm" type="file" multiple name="multipleImages">
   </div>
-
+  <div class="mb-3">
+    <div id="spinner-grow-1" class="spinner-grow text-success" role="status" hidden>
+      <span class="sr-only"></span>
+    </div>
+   
+    <div id="spinner-grow-2" class="spinner-grow text-warning" role="status" hidden>
+      <span class="sr-only"></span>
+    </div> 
+    <div id="spinner-grow-3" class="spinner-grow text-danger" role="status" hidden>
+      <span class="sr-only"></span>
+    </div>
+    <div id="spinner-grow-4" class="spinner-grow" role="status" hidden>
+      <span class="sr-only"></span>
+    </div>
+  
+  </div>
 </fieldset>
 </div>
 
 
   </div>
   <div class="col-auto">
-    <button type="submit" class="btn btn-secondary mb-3 justify-content-center">Post</button>
-  </div>
-</form>
+    <button type="submit" class="btn btn-secondary mb-3 justify-content-center" onclick="loadCircle()">Post</button>
+ 
+  </div></form>
+
 </div>
 
-
+ 
 
 {% endblock %}
