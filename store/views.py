@@ -36,7 +36,7 @@ def seedSuperUser(request,username,password):
 
 
 def home(request):
-    posts=Post.objects.all().order_by('-postedAt')
+    posts=Post.objects.filter(status=True).order_by('-postedAt')
     paginator = Paginator(posts, 12)  # Set the desired number of items per page
     page_number = request.GET.get('page')
     paginated_queryset = paginator.get_page(page_number)
